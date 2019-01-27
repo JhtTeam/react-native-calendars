@@ -41,7 +41,9 @@ export default function(theme={}) {
     dayHeader: {
       marginTop: 2,
       marginBottom: 7,
-      width: 32,
+      flex:1, 
+      paddingLeft: 3,
+      paddingRight: 3,
       textAlign: 'center',
       fontSize: appStyle.textDayHeaderFontSize,
       fontFamily: appStyle.textDayHeaderFontFamily,
