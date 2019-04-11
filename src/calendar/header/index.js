@@ -3,6 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import XDate from 'xdate';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import styleConstructor from './style';
 import { weekDayNames } from '../../dateutils';
 import {
@@ -26,7 +27,7 @@ class CalendarHeader extends Component {
   };
 
   static defaultProps = {
-    monthFormat: 'MMMM yyyy',
+    monthFormat: 'MMMM YYYY',
   };
 
   constructor(props) {
@@ -36,6 +37,7 @@ class CalendarHeader extends Component {
     this.substractMonth = this.substractMonth.bind(this);
     this.onPressLeft = this.onPressLeft.bind(this);
     this.onPressRight = this.onPressRight.bind(this);
+    this.monthMoment = moment(this.props.month.toDate());
   }
 
   addMonth() {
@@ -51,6 +53,7 @@ class CalendarHeader extends Component {
       nextProps.month.toString('yyyy MM') !==
       this.props.month.toString('yyyy MM')
     ) {
+      this.monthMoment = moment(nextProps.month.toDate());
       return true;
     }
     if (nextProps.showIndicator !== this.props.showIndicator) {
@@ -124,7 +127,8 @@ class CalendarHeader extends Component {
           {leftArrow}
           <View style={{ flexDirection: 'row' }}>
             <Text allowFontScaling={false} style={this.style.monthText} accessibilityTraits='header'>
-              {this.props.month.toString(this.props.monthFormat)}
+              {/* {this.props.month.toString(this.props.monthFormat)} */}
+              {this.monthMoment.format(this.props.monthFormat)}
             </Text>
             {indicator}
           </View>
